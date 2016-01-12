@@ -82,7 +82,7 @@ public class Application {
 	      in.close();
 	    }
 	  }
-
+/*
 	  private static void copy(InputStream in, File file) throws IOException {
 	    OutputStream out = new FileOutputStream(file);
 	    try {
@@ -91,7 +91,7 @@ public class Application {
 	      out.close();
 	    }
 	  }
-	
+*/
 
 
 }
