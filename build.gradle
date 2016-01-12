@@ -1,0 +1,41 @@
+
+/*
+ * In order to use ml-gradle, it must be applied. This occurs after the two above blocks for overriding properties so
+ * that those blocks can override properties before ml-gradle initializes itself.
+ */
+plugins {
+  id "com.marklogic.ml-gradle" version "2.0rc3" 
+  id "java"
+  id "eclipse"
+  id "application"
+}
+
+/*
+ * Everything below this line is optional and is intended to show different features provided by ml-gradle.
+ */
+
+/*
+ * This lists the repositories for finding project dependencies (which differ from buildscript dependencies - buildscript
+ * dependencies are not included in project artifacts that are built). These repositories are needed to satisfy the
+ * dependencies expressed below.
+ */
+repositories {
+    jcenter()
+    // Stores the corb jar - this will be moved to bintray soon
+    maven {url "http://rjrudin.github.io/marklogic-java/releases"}
+}
+
+/*
+ * This expresses dependencies on the ml-java and ml-junit libraries. The former is typically used for application
+ * code, and the latter supports writing JUnit-based tests. A dependency exists on RestAssured to show an option for
+ * using that library in tests that must invoke MarkLogic HTTP endpoints.
+ */
+dependencies {
+    // Needed to compile and run the JUnit tests
+    testCompile "com.marklogic:ml-junit:2.5"
+    testCompile "com.jayway.restassured:rest-assured:2.4.1"
+
+    compile "org.springframework:spring-context:4.2.4.RELEASE"
+}
+
+mainClassName = "com.marklogic.presentationml.Application"
