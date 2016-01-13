@@ -1,0 +1,35 @@
+<contract 
+	xmlns="http://marklogic.com/program360/contract"
+	xmlns:sch="http://marklogic.com/program360/schedule"
+	xmlns:ism="urn:us:gov:ic:ism">
+	<number>xyz000-000-0000</number>
+	<name ism:classification="U">XYZ Contract</name>
+	<purpose ism:classification="U">O&amp;M and software integration/sustainment</purpose>
+	<type>CPFF</type>
+	<ceiling>1000000</ceiling>
+	<funding-status>16600000</funding-status>
+	<period-of-performance-start>2010-09-03</period-of-performance-start>
+	<period-of-performance-end>2020-07-31</period-of-performance-end>
+	<prime-contractor>XYZ Corporation</prime-contractor>
+	<follow-on>Complete the contract for the development of Next System</follow-on>
+	<sch:schedule>
+		<sch:task>
+			<sch:name>Base Year</sch:name>
+			<sch:start-date>2013-09-03</sch:start-date>
+			<sch:end-date>2014-07-31</sch:end-date>
+			<sch:duration-days>150</sch:duration-days>
+			<sch:status></sch:status>
+		</sch:task>
+		<sch:task>
+			<sch:name>Option 1</sch:name>
+			<sch:start-date>2014-08-01</sch:start-date>
+			<sch:end-date>2015-07-31</sch:end-date>
+			<sch:duration-days>150</sch:duration-days>
+		</sch:task>
+		<sch:task>
+			<sch:name>ASC</sch:name>
+			<sch:start-date>2014-09-30</sch:start-date>
+			<sch:duration-days>0</sch:duration-days>
+		</sch:task>
+	</sch:schedule>
+</contract>
