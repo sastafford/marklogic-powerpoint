@@ -12,24 +12,25 @@ declare function get(
 {
   let $dir := map:get($params, "dir")
   let $template := (map:get($params, "template"), "template")[1]
+  let $uris := cts:uris("", (), cts:directory-query("/template.pptx/", "infinity"))
   let $zip-manifest :=
-    <parts xmlns="xdmp:zip">
-      <part>docProps/app.xml</part>
-      <part>docProps/core.xml</part>
-    </parts> 
+    element zip:parts {
+      for $uri in $uris
+      return element zip:part { fn:replace($uri, "/template.pptx/", "") }
+    }
   let $zip := 
     xdmp:zip-create(
       $zip-manifest,
       (
-        fn:doc("/template.pptx/docProps/app.xml"),
-        fn:doc("/template.pptx/docProps/core.xml")
+        for $uri in $uris
+        return fn:doc($uri)
       )
     ) 
   return 
   (
     (: Uncomment this line to return a PPTX file :)
-    (: map:put($context, "output-types", "application/vnd.openxmlformats-officedocument.presentationml.presentation"), :)
-    map:put($context, "output-types", "application/zip"),
+    (: map:put($context, "output-types", "application/vnd.openxmlformats-officedocument.presentationml.presentation"), :) 
+    map:put($context, "output-types", "application/zip"), 
     document{ binary {$zip} }
   )
 };
