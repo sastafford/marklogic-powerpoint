@@ -9,4 +9,6 @@ Generate REST API application for 'pm-dashboard'
 Generate a Powerpoint file from the markup located under src/main/resources
  > ./gradle run
 
+Ingest Powerpoint template into MarkLogic
+ > ./gradle importPresentationMlTemplate
 
