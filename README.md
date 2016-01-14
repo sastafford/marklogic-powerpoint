@@ -11,4 +11,7 @@ Generate a Powerpoint file from the markup located under src/main/resources
 
 Ingest Powerpoint template into MarkLogic
  > ./gradle importPresentationMlTemplate
+ 
+Ingest Sample data into MarkLogic
+ > ./gradle importSampleData
 

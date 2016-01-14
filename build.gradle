@@ -68,4 +68,15 @@ task importPresentationMlTemplate(type: com.marklogic.gradle.task.MlcpTask) {
     args = ["-input_compression_codec", "zip"]
 }
 
+task importSampleData(type: com.marklogic.gradle.task.MlcpTask) {
+    classpath = configurations.mlcp
+    command = "IMPORT"
+    database = mlAppConfig.contentDatabaseName
+    input_file_path = "src/main/resources/sample"
+    output_collections = "sample"
+    output_permissions = "rest-reader,read,rest-writer,update"
+    output_uri_replace = ".*sample/,'/'"
+}
+
+
 mainClassName = "com.marklogic.presentationml.Application"
