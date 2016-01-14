@@ -60,7 +60,7 @@ task importPresentationMlTemplate(type: com.marklogic.gradle.task.MlcpTask) {
     classpath = configurations.mlcp
     command = "IMPORT"
     database = mlAppConfig.contentDatabaseName
-    document_type = "xml"
+    document_type = "mixed"
     input_file_type = "documents"
     input_file_path = "src/main/resources/powerpoint"
     input_compressed = "true"

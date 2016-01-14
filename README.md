@@ -1,6 +1,13 @@
 # marklogic-powerpoint
 Generation of Powerpoint slides from data stored in MarkLogic
 
+## Setup
+
+Create rels mimetype from the admin console
+1. name = text/rels
+2. extensions = rels
+3. format = xml
+
 ## Commands
 
 Generate REST API application for 'pm-dashboard'
