@@ -1,6 +1,6 @@
-xquery version "1.0-ml";
-
+declare namespace ism = "urn:us:gov:ic:ism";
 let $sample := fn:doc("/sample.xml")
+let $classification := $sample/*:contract/*:name/@*:classification
 let $slide:=
   <p:sld xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
     <p:cSld>
@@ -20,34 +20,32 @@ let $slide:=
         </p:grpSpPr>
         <p:sp>
           <p:nvSpPr>
-            <p:cNvPr id="2" name="Title 1" />
+            <p:cNvPr id="2" name="Title 1"/>
             <p:cNvSpPr>
-              <a:spLocks noGrp="1" />
+              <a:spLocks noGrp="1"/>
             </p:cNvSpPr>
             <p:nvPr>
-              <p:ph type="ctrTitle" />
+              <p:ph type="ctrTitle"/>
             </p:nvPr>
           </p:nvSpPr>
           <p:spPr>
             <a:xfrm>
-              <a:off x="1020002" y="586887" />
-              <a:ext cx="7772400" cy="614728" />
+              <a:off x="1020002" y="586887"/>
+              <a:ext cx="7772400" cy="614728"/>
             </a:xfrm>
-            <a:solidFill>
-              <a:srgbClr val="DCE6F2" />
-            </a:solidFill>
+            <a:noFill/>
           </p:spPr>
           <p:txBody>
             <a:bodyPr>
-              <a:normAutofit fontScale="90000" />
+              <a:normAutofit fontScale="90000"/>
             </a:bodyPr>
-            <a:lstStyle />
+            <a:lstStyle/>
             <a:p>
               <a:r>
-                <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                <a:t>{$sample/contract/name/text()}</a:t>
+                <a:rPr dirty="0" lang="en-US" smtClean="0"/>
+                <a:t>{fn:concat(fn:concat("(",$classification),") ")} {$sample/*:contract/*:name/text()}</a:t>
               </a:r>
-              <a:endParaRPr lang="en-US" dirty="0" />
+              <a:endParaRPr dirty="0" lang="en-US"/>
             </a:p>
           </p:txBody>
         </p:sp>
@@ -67,339 +65,81 @@ let $slide:=
             </a:prstGeom>
             <a:noFill />
           </p:spPr>
+        </p:sp>
+        <p:sp>
+          <p:nvSpPr>
+            <p:cNvPr id="3" name="Subtitle 3"/>
+            <p:cNvSpPr>
+              <a:spLocks noGrp="1"/>
+            </p:cNvSpPr>
+            <p:nvPr>
+              <p:ph idx="1"/>
+            </p:nvPr>
+          </p:nvSpPr>
+          <p:spPr>
+            <a:xfrm>
+              <a:off x="762000" y="1447800"/>
+              <a:ext cx="8229600" cy="1905000"/>
+            </a:xfrm>
+          </p:spPr>
           <p:txBody>
-            <a:bodyPr wrap="square" rtlCol="0">
-              <a:spAutoFit />
-            </a:bodyPr>
-            <a:lstStyle />
+            <a:bodyPr/>
+            <a:lstStyle/>
             <a:p>
-              <a:pPr algn="ctr" />
-
               <a:r>
-                <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                <a:t>{$sample/contract/purpose/text()}</a:t>
+                <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
+                <a:t>NUMBER : {$sample/*:contract/*:number/text()}</a:t>
               </a:r>
-              <a:endParaRPr lang="en-US" dirty="0" />
+            </a:p>
+            <a:p>
+              <a:r>
+                <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
+                <a:t>PURPOSE : {fn:concat(fn:concat("(",$classification),") ")} {$sample/*:contract/*:purpose/text()}</a:t>
+              </a:r>
+            </a:p>
+            <a:p>
+              <a:r>
+                <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
+                <a:t>TYPE : {$sample/*:contract/*:type/text()}</a:t>
+              </a:r>
+            </a:p>
+            <a:p>
+              <a:r>
+                <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
+                <a:t>CEILING : {$sample/*:contract/*:ceiling/text()}</a:t>
+              </a:r>
+              <a:endParaRPr dirty="0" lang="en-US" sz="1400"/>
+            </a:p>
+            <a:p>
+              <a:r>
+                <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
+                <a:t>FUNDING STATUS : {$sample/*:contract/*:funding-status/text()}</a:t>
+              </a:r>
+              <a:endParaRPr dirty="0" lang="en-US" sz="1400"/>
+            </a:p>
+            <a:p>
+              <a:r>
+                <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
+                <a:t>PERIOD OF PERFORMANCE : {$sample/*:contract/*:period-of-performance-start/text()} - {$sample/*:contract/*:period-of-performance-end/text()}</a:t>
+              </a:r>
+              <a:endParaRPr dirty="0" lang="en-US" sz="1400"/>
+            </a:p>
+            <a:p>
+              <a:r>
+                <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
+                <a:t>PRIME CONTRACTOR : {$sample/*:contract/*:prime-contractor/text()}</a:t>
+              </a:r>
+              <a:endParaRPr dirty="0" lang="en-US" sz="1400"/>
+            </a:p>
+            <a:p>
+              <a:r>
+                <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
+                <a:t>FOLLOW ON: {$sample/*:contract/*:follow-on/text()}</a:t>
+              </a:r>
+              <a:endParaRPr dirty="0" lang="en-US" sz="1400"/>
             </a:p>
           </p:txBody>
         </p:sp>
-        <p:graphicFrame>
-          <p:nvGraphicFramePr>
-            <p:cNvPr id="7" name="Table 6" />
-            <p:cNvGraphicFramePr>
-              <a:graphicFrameLocks noGrp="1" />
-            </p:cNvGraphicFramePr>
-            <p:nvPr>
-              <p:extLst>
-                <p:ext uri="{{D42A27DB-BD31-4B8C-83A1-F6EECF244321}}">
-                  <p14:modId xmlns:p14="http://schemas.microsoft.com/office/powerpoint/2010/main" val="278749714" />
-                </p:ext>
-              </p:extLst>
-            </p:nvPr>
-          </p:nvGraphicFramePr>
-          <p:xfrm>
-            <a:off x="1881075" y="1858445" />
-            <a:ext cx="6349840" cy="741680" />
-          </p:xfrm>
-          <a:graphic>
-            <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/table">
-              <a:tbl>
-                <a:tblPr firstRow="1" bandRow="1">
-                  <a:tableStyleId>{{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}}</a:tableStyleId>
-                </a:tblPr>
-                <a:tblGrid>
-                  <a:gridCol w="1277750" />
-                  <a:gridCol w="1277750" />
-                  <a:gridCol w="1277750" />
-                  <a:gridCol w="1265718" />
-                  <a:gridCol w="1250872" />
-                </a:tblGrid>
-                <a:tr h="370840">
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                          <a:t>Type</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" dirty="0" />
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr />
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                          <a:t>Ceiling</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" dirty="0" />
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr />
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                          <a:t>Funding</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" dirty="0" />
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr />
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                          <a:t>Start Date</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" dirty="0" />
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr />
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                          <a:t>End Date</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" dirty="0" />
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr />
-                  </a:tc>
-                </a:tr>
-                <a:tr h="370840">
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                          <a:t>{$sample/contract/type/text()}</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" dirty="0" />
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr />
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                          <a:t>{$sample/contract/ceiling/text()}</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" dirty="0" />
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr />
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                          <a:t>{$sample/contract/funding-status/text()}</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" dirty="0" />
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr />
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                          <a:t>{$sample/contract/period-of-performance-start/text()}</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" dirty="0" />
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr />
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="fi-FI" dirty="0" smtClean="0" />
-                          <a:t>{$sample/contract/period-of-performance-end/text()}</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" dirty="0" />
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr />
-                  </a:tc>
-                </a:tr>
-              </a:tbl>
-            </a:graphicData>
-          </a:graphic>
-        </p:graphicFrame>
-        <p:graphicFrame>
-          <p:nvGraphicFramePr>
-            <p:cNvPr id="9" name="Table 8" />
-            <p:cNvGraphicFramePr>
-              <a:graphicFrameLocks noGrp="1" />
-            </p:cNvGraphicFramePr>
-            <p:nvPr>
-              <p:extLst>
-                <p:ext uri="{{D42A27DB-BD31-4B8C-83A1-F6EECF244321}}">
-                  <p14:modId xmlns:p14="http://schemas.microsoft.com/office/powerpoint/2010/main" val="1554662600" />
-                </p:ext>
-              </p:extLst>
-            </p:nvPr>
-          </p:nvGraphicFramePr>
-          <p:xfrm>
-            <a:off x="1881075" y="2743297" />
-            <a:ext cx="6349840" cy="1010920" />
-          </p:xfrm>
-          <a:graphic>
-            <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/table">
-              <a:tbl>
-                <a:tblPr firstRow="1" bandRow="1">
-                  <a:tableStyleId>{{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}}</a:tableStyleId>
-                </a:tblPr>
-                <a:tblGrid>
-                  <a:gridCol w="2071017" />
-                  <a:gridCol w="4278823" />
-                </a:tblGrid>
-                <a:tr h="370840">
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                          <a:t>Prime Contractor</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" dirty="0" />
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr />
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="en-US" sz="1800" kern="1200" dirty="0" smtClean="0">
-                            <a:solidFill>
-                              <a:schemeClr val="dk1" />
-                            </a:solidFill>
-                            <a:latin typeface="+mn-lt" />
-                            <a:ea typeface="+mn-ea" />
-                            <a:cs typeface="+mn-cs" />
-                          </a:rPr>
-                          <a:t>{$sample/contract/prime-contractor/text()}</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" sz="1800" kern="1200" dirty="0">
-                          <a:solidFill>
-                            <a:schemeClr val="dk1" />
-                          </a:solidFill>
-                          <a:latin typeface="+mn-lt" />
-                          <a:ea typeface="+mn-ea" />
-                          <a:cs typeface="+mn-cs" />
-                        </a:endParaRPr>
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr>
-                      <a:solidFill>
-                        <a:schemeClr val="accent1">
-                          <a:lumMod val="20000" />
-                          <a:lumOff val="80000" />
-                        </a:schemeClr>
-                      </a:solidFill>
-                    </a:tcPr>
-                  </a:tc>
-                </a:tr>
-                <a:tr h="370840">
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="en-US" sz="1800" b="1" kern="1200" dirty="0" smtClean="0">
-                            <a:solidFill>
-                              <a:schemeClr val="lt1" />
-                            </a:solidFill>
-                            <a:latin typeface="+mn-lt" />
-                            <a:ea typeface="+mn-ea" />
-                            <a:cs typeface="+mn-cs" />
-                          </a:rPr>
-                          <a:t>Follow-on</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" dirty="0" />
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr>
-                      <a:solidFill>
-                        <a:schemeClr val="accent1" />
-                      </a:solidFill>
-                    </a:tcPr>
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr />
-                      <a:lstStyle />
-                      <a:p>
-                        <a:r>
-                          <a:rPr lang="en-US" sz="1800" b="1" kern="1200" dirty="0" smtClean="0">
-                            <a:solidFill>
-                              <a:schemeClr val="dk1" />
-                            </a:solidFill>
-                            <a:latin typeface="+mn-lt" />
-                            <a:ea typeface="+mn-ea" />
-                            <a:cs typeface="+mn-cs" />
-                          </a:rPr>
-                          <a:t>{$sample/contract/follow-on/text()}</a:t>
-                        </a:r>
-                        <a:endParaRPr lang="en-US" sz="1800" b="1" kern="1200" dirty="0">
-                          <a:solidFill>
-                            <a:schemeClr val="dk1" />
-                          </a:solidFill>
-                          <a:latin typeface="+mn-lt" />
-                          <a:ea typeface="+mn-ea" />
-                          <a:cs typeface="+mn-cs" />
-                        </a:endParaRPr>
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr />
-                  </a:tc>
-                </a:tr>
-              </a:tbl>
-            </a:graphicData>
-          </a:graphic>
-        </p:graphicFrame>
         <p:graphicFrame>
           <p:nvGraphicFramePr>
             <p:cNvPr id="11" name="Table 10" />
@@ -502,83 +242,82 @@ let $slide:=
                     </a:txBody>
                     <a:tcPr />
                   </a:tc>
-                </a:tr>
-                {
-                  for $task in $sample/contract/*:schedule/*:task
-                  return
-                    <a:tr h="370840">
-                      <a:tc>
-                        <a:txBody>
-                          <a:bodyPr />
-                          <a:lstStyle />
-                          <a:p>
-                            <a:r>
-                              <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                              <a:t>{$task/*:name/text()}</a:t>
-                            </a:r>
-                            <a:endParaRPr lang="en-US" dirty="0" />
-                          </a:p>
-                        </a:txBody>
-                        <a:tcPr />
-                      </a:tc>
-                      <a:tc>
-                        <a:txBody>
-                          <a:bodyPr />
-                          <a:lstStyle />
-                          <a:p>
-                            <a:r>
-                              <a:rPr lang="is-IS" dirty="0" smtClean="0" />
-                              <a:t>{$task/*:start-date/text()}</a:t>
-                            </a:r>
-                            <a:endParaRPr lang="en-US" dirty="0" />
-                          </a:p>
-                        </a:txBody>
-                        <a:tcPr />
-                      </a:tc>
-                      <a:tc>
-                        <a:txBody>
-                          <a:bodyPr />
-                          <a:lstStyle />
-                          <a:p>
-                            <a:r>
-                              <a:rPr lang="is-IS" dirty="0" smtClean="0" />
-                              <a:t>{$task/*:end-date/text()}</a:t>
-                            </a:r>
-                            <a:endParaRPr lang="en-US" dirty="0" />
-                          </a:p>
-                        </a:txBody>
-                        <a:tcPr />
-                      </a:tc>
-                      <a:tc>
-                        <a:txBody>
-                          <a:bodyPr />
-                          <a:lstStyle />
-                          <a:p>
-                            <a:r>
-                              <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                              <a:t>{$task/*:duration-days/text()}</a:t>
-                            </a:r>
-                            <a:endParaRPr lang="en-US" dirty="0" />
-                          </a:p>
-                        </a:txBody>
-                        <a:tcPr />
-                      </a:tc>
-                      <a:tc>
-                        <a:txBody>
-                          <a:bodyPr />
-                          <a:lstStyle />
-                          <a:p>
-                            <a:r>
-                              <a:rPr lang="en-US" dirty="0" smtClean="0" />
-                              <a:t>{$task/*:status/text()}</a:t>
-                            </a:r>
-                            <a:endParaRPr lang="en-US" dirty="0" />
-                          </a:p>
-                        </a:txBody>
-                        <a:tcPr />
-                      </a:tc>
-                    </a:tr>
-                }
+                </a:tr>{
+                for $t in $sample/*:contract/*:schedule/*:task
+                return
+                  <a:tr h="370840">
+                    <a:tc>
+                      <a:txBody>
+                        <a:bodyPr />
+                        <a:lstStyle />
+                        <a:p>
+                          <a:r>
+                            <a:rPr lang="en-US" dirty="0" smtClean="0" />
+                            <a:t>{$t/*:name/text()}</a:t>
+                          </a:r>
+                          <a:endParaRPr lang="en-US" dirty="0" />
+                        </a:p>
+                      </a:txBody>
+                      <a:tcPr />
+                    </a:tc>
+                    <a:tc>
+                      <a:txBody>
+                        <a:bodyPr />
+                        <a:lstStyle />
+                        <a:p>
+                          <a:r>
+                            <a:rPr lang="is-IS" dirty="0" smtClean="0" />
+                            <a:t>{$t/*:start-date/text()}</a:t>
+                          </a:r>
+                          <a:endParaRPr lang="en-US" dirty="0" />
+                        </a:p>
+                      </a:txBody>
+                      <a:tcPr />
+                    </a:tc>
+                    <a:tc>
+                      <a:txBody>
+                        <a:bodyPr />
+                        <a:lstStyle />
+                        <a:p>
+                          <a:r>
+                            <a:rPr lang="is-IS" dirty="0" smtClean="0" />
+                            <a:t>{$t/*:end-date/text()}</a:t>
+                          </a:r>
+                          <a:endParaRPr lang="en-US" dirty="0" />
+                        </a:p>
+                      </a:txBody>
+                      <a:tcPr />
+                    </a:tc>
+                    <a:tc>
+                      <a:txBody>
+                        <a:bodyPr />
+                        <a:lstStyle />
+                        <a:p>
+                          <a:r>
+                            <a:rPr lang="en-US" dirty="0" smtClean="0" />
+                            <a:t>{$t/*:duration-days/text()}</a:t>
+                          </a:r>
+                          <a:endParaRPr lang="en-US" dirty="0" />
+                        </a:p>
+                      </a:txBody>
+                      <a:tcPr />
+                    </a:tc>
+                    <a:tc>
+                      <a:txBody>
+                        <a:bodyPr />
+                        <a:lstStyle />
+                        <a:p>
+                          <a:r>
+                            <a:rPr lang="en-US" dirty="0" smtClean="0" />
+                            <a:t>{$t/*:status/text()}</a:t>
+                          </a:r>
+                          <a:endParaRPr lang="en-US" dirty="0" />
+                        </a:p>
+                      </a:txBody>
+                      <a:tcPr />
+                    </a:tc>
+                  </a:tr>
+              }
               </a:tbl>
             </a:graphicData>
           </a:graphic>
@@ -596,7 +335,4 @@ let $slide:=
   </p:sld>
 return
 (:xdmp:document-insert("/content/Users/adhavle/Demos/Q4-2015/marklogic-powerpoint-master/src/main/resources/powerpoint/ppt/slides/slide1.xml", $ppt-template-simple):)
-  (
-    xdmp:log("now saving template"),
-    xdmp:save("/Users/adhavle/Demos/Q4-2015/marklogic-powerpoint-master/src/main/resources/powerpoint/ppt/slides/slide1.xml" , $slide)
-  )
+  xdmp:save("/Users/adhavle/Demos/Q4-2015/powerpoint/marklogic-powerpoint/src/main/resources/powerpoint/ppt/slides/slide1.xml" , $slide)
