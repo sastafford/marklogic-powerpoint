@@ -27,6 +27,8 @@ declare function get(
     ) 
   return 
   (
+    (: Uncomment this line to return a PPTX file :)
+    (: map:put($context, "output-types", "application/vnd.openxmlformats-officedocument.presentationml.presentation"), :)
     map:put($context, "output-types", "application/zip"),
     document{ binary {$zip} }
   )
