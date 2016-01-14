@@ -15,3 +15,6 @@ Ingest Powerpoint template into MarkLogic
 Ingest Sample data into MarkLogic
  > ./gradle importSampleData
 
+Trigger the PresentationML export
+ > http://<host>:8400/v1/resources/export-presentation-ml
+
