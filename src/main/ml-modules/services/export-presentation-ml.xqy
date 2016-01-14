@@ -2,19 +2,27 @@ xquery version "1.0-ml";
 
 module namespace resource = "http://marklogic.com/rest-api/resource/export-presentation-ml";
 
+declare namespace html = "http://www.w3.org/1999/xhtml";
+
 declare function get(
   $context as map:map,
   $params  as map:map
   ) as document-node()*
 {
-  document {
-    text { 
-      let $dir := map:get($params, "dir")
-      let $template := (map:get($params, "template"), "template")[1]
-      for $uri in cts:uris("", (), cts:directory-query(fn:concat("/", $template, ".pptx/"), "infinity"))
-      return $uri
-    }
-  }
+  let $dir := map:get($params, "dir")
+  let $template := (map:get($params, "template"), "template")[1]
+  let $doc :=
+    document {
+      element html:html {
+        element html:body {
+          element html:p { fn:concat("dir: ", $dir) },
+          element html:p { fn:concat("template: ", $template) },
+          for $uri in cts:uris("", (), cts:directory-query(fn:concat("/", $template, ".pptx/"), "infinity"))
+          return element html:p { $uri }
+        }
+      }
+    } 
+  return $doc
 };
 
 declare function put(
