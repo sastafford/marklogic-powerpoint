@@ -1,7 +1,17 @@
+xquery version "1.0-ml";
+
+declare namespace c = "http://marklogic.com/program360/contract";
 declare namespace ism = "urn:us:gov:ic:ism";
-let $sample := fn:doc("/sample.xml")
-let $classification := $sample/*:contract/*:name/@*:classification
-let $slide:=
+declare namespace p = "http://schemas.openxmlformats.org/presentationml/2006/main";
+declare namespace a="http://schemas.openxmlformats.org/drawingml/2006/main";
+declare namespace r = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
+declare namespace sch = "http://marklogic.com/program360/schedule";
+
+declare variable $CONTRACT-URI as xs:string external;	
+
+let $contract := fn:doc($CONTRACT-URI)
+let $classification := $contract/*:contract/*:name/@*:classification
+let $slide :=
   <p:sld xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
     <p:cSld>
       <p:spTree>
@@ -43,7 +53,7 @@ let $slide:=
             <a:p>
               <a:r>
                 <a:rPr dirty="0" lang="en-US" smtClean="0"/>
-                <a:t>{fn:concat(fn:concat("(",$classification),") ")} {$sample/*:contract/*:name/text()}</a:t>
+                <a:t>{fn:concat(fn:concat("(",$classification),") ")} {$contract/*:contract/*:name/text()}</a:t>
               </a:r>
               <a:endParaRPr dirty="0" lang="en-US"/>
             </a:p>
@@ -88,53 +98,53 @@ let $slide:=
             <a:p>
               <a:r>
                 <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
-                <a:t>NUMBER : {$sample/*:contract/*:number/text()}</a:t>
+                <a:t>NUMBER : {$contract/*:contract/*:number/text()}</a:t>
               </a:r>
             </a:p>
             <a:p>
               <a:r>
                 <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
-                <a:t>PURPOSE : {fn:concat(fn:concat("(",$classification),") ")} {$sample/*:contract/*:purpose/text()}</a:t>
+                <a:t>PURPOSE : {fn:concat(fn:concat("(",$classification),") ")} {$contract/*:contract/*:purpose/text()}</a:t>
               </a:r>
             </a:p>
             <a:p>
               <a:r>
                 <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
-                <a:t>TYPE : {$sample/*:contract/*:type/text()}</a:t>
+                <a:t>TYPE : {$contract/*:contract/*:type/text()}</a:t>
               </a:r>
             </a:p>
             <a:p>
               <a:r>
                 <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
-                <a:t>CEILING : {$sample/*:contract/*:ceiling/text()}</a:t>
-              </a:r>
-              <a:endParaRPr dirty="0" lang="en-US" sz="1400"/>
-            </a:p>
-            <a:p>
-              <a:r>
-                <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
-                <a:t>FUNDING STATUS : {$sample/*:contract/*:funding-status/text()}</a:t>
+                <a:t>CEILING : {$contract/*:contract/*:ceiling/text()}</a:t>
               </a:r>
               <a:endParaRPr dirty="0" lang="en-US" sz="1400"/>
             </a:p>
             <a:p>
               <a:r>
                 <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
-                <a:t>PERIOD OF PERFORMANCE : {$sample/*:contract/*:period-of-performance-start/text()} - {$sample/*:contract/*:period-of-performance-end/text()}</a:t>
+                <a:t>FUNDING STATUS : {$contract/*:contract/*:funding-status/text()}</a:t>
               </a:r>
               <a:endParaRPr dirty="0" lang="en-US" sz="1400"/>
             </a:p>
             <a:p>
               <a:r>
                 <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
-                <a:t>PRIME CONTRACTOR : {$sample/*:contract/*:prime-contractor/text()}</a:t>
+                <a:t>PERIOD OF PERFORMANCE : {$contract/*:contract/*:period-of-performance-start/text()} - {$contract/*:contract/*:period-of-performance-end/text()}</a:t>
               </a:r>
               <a:endParaRPr dirty="0" lang="en-US" sz="1400"/>
             </a:p>
             <a:p>
               <a:r>
                 <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
-                <a:t>FOLLOW ON: {$sample/*:contract/*:follow-on/text()}</a:t>
+                <a:t>PRIME CONTRACTOR : {$contract/*:contract/*:prime-contractor/text()}</a:t>
+              </a:r>
+              <a:endParaRPr dirty="0" lang="en-US" sz="1400"/>
+            </a:p>
+            <a:p>
+              <a:r>
+                <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
+                <a:t>FOLLOW ON: {$contract/*:contract/*:follow-on/text()}</a:t>
               </a:r>
               <a:endParaRPr dirty="0" lang="en-US" sz="1400"/>
             </a:p>
@@ -243,7 +253,7 @@ let $slide:=
                     <a:tcPr />
                   </a:tc>
                 </a:tr>{
-                for $t in $sample/*:contract/*:schedule/*:task
+                for $t in $contract/*:contract/*:schedule/*:task
                 return
                   <a:tr h="370840">
                     <a:tc>
@@ -333,6 +343,4 @@ let $slide:=
       <a:masterClrMapping />
     </p:clrMapOvr>
   </p:sld>
-return
-(:xdmp:document-insert("/content/Users/adhavle/Demos/Q4-2015/marklogic-powerpoint-master/src/main/resources/powerpoint/ppt/slides/slide1.xml", $ppt-template-simple):)
-  xdmp:save("/Users/adhavle/Demos/Q4-2015/powerpoint/marklogic-powerpoint/src/main/resources/powerpoint/ppt/slides/slide1.xml" , $slide)
+return $slide

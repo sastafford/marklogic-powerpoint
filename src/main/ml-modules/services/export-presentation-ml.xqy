@@ -27,7 +27,11 @@ declare function get(
       $zip-manifest,
       (
         for $uri in $uris
-        return fn:doc($uri)
+        return 
+          if (fn:contains($uri, "slide1.xml")) then 
+            xdmp:invoke("/ext/contract-transform.xqy", (xs:QName("CONTRACT-URI"), "/contract-1.xml"))
+          else
+            fn:doc($uri)
       )
     ) 
   return 
