@@ -30,6 +30,8 @@ declare function get(
         return 
           if ($uri = "/template.pptx/ppt/slides/slide1.xml") then 
             xdmp:invoke("/ext/contract-transform.xqy", (xs:QName("CONTRACT-URI"), "/contract-1.xml"))
+          else if($uri = "/template.pptx/ppt/slides/slide2.xml") then
+            xdmp:invoke("/ext/component-transform.xqy", (xs:QName("PROJECT-URI"), "/project-1.xml"))
           else
             fn:doc($uri)
       )

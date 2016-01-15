@@ -5,3 +5,5 @@ bin/
 .gradle/
 .settings/
 example.pptx
+gradle.properties
+build.gradle
