@@ -558,7 +558,7 @@ let $slide :=
               </a:pPr>
               <a:r>
                 <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1600"/>
-                <a:t>{$project/*:component/*:requirement/text()}</a:t>
+                <a:t>{$project/*:component/*:description/text()}</a:t>
               </a:r>
             </a:p>
             <a:p>
