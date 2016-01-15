@@ -557,7 +557,7 @@ let $slide :=
                 <a:buChar char="•"/>
               </a:pPr>
               <a:r>
-                <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1600"/>
+                <a:rPr dirty="0" lang="en-US" smtClean="0" sz="1400"/>
                 <a:t>{$project/*:component/*:description/text()}</a:t>
               </a:r>
             </a:p>
@@ -881,7 +881,7 @@ let $slide :=
           </p:nvSpPr>
           <p:spPr>
             <a:xfrm>
-              <a:off x="4572000" y="6019800"/>
+              <a:off x="4572000" y="6172200"/>
               <a:ext cx="1676400" cy="383977"/>
             </a:xfrm>
             <a:prstGeom prst="rect">
@@ -911,8 +911,8 @@ let $slide :=
           </p:nvSpPr>
           <p:spPr>
             <a:xfrm>
-              <a:off x="6237514" y="6040866"/>
-              <a:ext cx="2628900" cy="369332"/>
+              <a:off x="6248400" y="6187276"/>
+              <a:ext cx="2628900" cy="491581"/>
             </a:xfrm>
             <a:prstGeom prst="rect">
               <a:avLst/>
