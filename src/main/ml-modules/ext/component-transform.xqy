@@ -927,7 +927,7 @@ let $slide :=
             <a:p>
               <a:r>
                 <a:rPr dirty="0" lang="en-US" smtClean="0"/>
-                <a:t>(U) FFO: FY14 $2.5 million</a:t>
+                <a:t>{('('||fn:data($project/*:component/*:funding/@*:classification)||')' || ' '|| $project/*:component/*:funding/*:type/text() || ': ' || $project/*:component/*:funding/*:fiscal-year/text() || ' $' || $project/*:component/*:funding/*:status/text())}</a:t>
               </a:r>
               <a:endParaRPr dirty="0" lang="en-US"/>
             </a:p>
