@@ -431,7 +431,7 @@ let $slide :=
               <a:p>
                 <a:r>
                   <a:rPr dirty="0" lang="en-US" smtClean="0"/>
-                  <a:t>Requirement:</a:t>
+                  <a:t>Requirement: {$project/*:component/*:requirement/text()}</a:t>
                 </a:r>
                 <a:endParaRPr dirty="0" lang="en-US"/>
               </a:p>
@@ -951,6 +951,4 @@ let $slide :=
       </p:tnLst>
     </p:timing>
   </p:sld>
-
-  (:xdmp:document-insert("/template.pptx/ppt/slides/slide2.xml", $slide, (), "presentationML"):)
 return document { $slide }
