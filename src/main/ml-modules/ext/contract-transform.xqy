@@ -343,4 +343,4 @@ let $slide :=
       <a:masterClrMapping />
     </p:clrMapOvr>
   </p:sld>
-return $slide
+return document { $slide }
