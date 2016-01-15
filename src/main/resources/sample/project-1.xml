@@ -1,42 +1,47 @@
 <component 
 	xmlns="http://marklogic.com/program360/component"
 	xmlns:ism="urn:us:gov:ic:ism">
-	<number>123-abc</number>
-	<name></name>
+	<number>123-ABC</number>
+	<name ism:classification="U">Oscar the Grouch</name>
+	<last-update>2015-01-15</last-update>
+	<requirement>CENTCOM shall improve the waste management logistics by 50%</requirement>
 	<class>project</class>
 	<sponsors>
+		<sponsor>WF</sponsor>
+		<sponsor>MID</sponsor>
+		<sponsor>OIO</sponsor>
 	</sponsors>
 	<customers>
+		<customer>CENTCOM</customer>
 	</customers>
 	<partners>
+		<partner>GED</partner>
+		<partner>PBS</partner>
 	</partners>
-	<transition-agent></transition-agent>
+	<transition-agent>HBO</transition-agent>
 	<contract>
-		<uri></uri>
-		<name></name>
+		<uri>/contract-1.xml</uri>
+		<name>ABC-123 Vehicle</name>
 	</contract>
-	<stakeholders>
-		<stakeholder></stakeholder>
-		<stakeholder></stakeholder>
-	</stakeholders>
-	<state>accepted</state>
-	<strategy></strategy>
-	<status>
-		<burn-rate></burn-rate>
-		<schedule></schedule>
-		<performance></performance>
-		<funding></funding>
-		<sustain></sustain>
-		<risk></risk>
-		<issues></issues>
-	</status>
-	<funding>
-		<type></type>
-		<fiscal-year></fiscal-year>
-		<status></status>
+	<prime>Seasme Street LLC</prime>
+	<interagency-agreement>Big Bird</interagency-agreement>
+	<security-classification-guide>SCRAM</security-classification-guide>
+	<metrics>
+		<burn-rate>green</burn-rate>
+		<schedule>red</schedule>
+		<performance>green</performance>
+		<funding>green</funding>
+		<sustain>yellow</sustain>
+		<risk>yellow</risk>
+		<issues>green</issues>
+	</metrics>
+	<status ism:classification="U">Delivery of trash cans to CENTCOM will be delayed due to sensor backorder</status>	
+	<status ism:classification="S">Bluetooth vulnerability can be exposed to security threat</status>	
+	<status ism:classification="U">Elmo has successfully tested trash can load testing</status>	
+	<funding ism:classification="U">
+		<type>FFO</type>
+		<fiscal-year>2014</fiscal-year>
+		<status>3000000</status>
 	</funding>
-	<description></description>
-	<issues>
-		<issue></issue>
-	</issues>
+	<description ism:classification="S">Project "Oscar the Grouch" aims to put smart garbage cans by the desks of all analysts world wide.  These bluetooth enabled garbage cans will provide real time alerting when the trash cans reach capacity and can provide REST API's for integration with mobile applications</description>
 </component>
