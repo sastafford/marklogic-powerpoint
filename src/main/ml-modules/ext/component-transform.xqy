@@ -9,7 +9,27 @@ declare namespace sch = "http://marklogic.com/program360/schedule";
 
 declare variable $PROJECT-URI as xs:string external;
 
-
+declare function local:get-color-code($val){
+  let $map := map:map()
+  let $put := (map:put($map, "green","00B050"),
+  map:put($map, "yellow","FFFF00"),
+  map:put($map, "red","FF0000"))
+  return
+    <a:tc>
+      <a:txBody>
+        <a:bodyPr/>
+        <a:lstStyle/>
+        <a:p>
+          <a:endParaRPr dirty="0" lang="en-US" sz="1000"/>
+        </a:p>
+      </a:txBody>
+      <a:tcPr>
+        <a:solidFill>
+          <a:srgbClr val="{map:get($map,$val)}"/>
+        </a:solidFill>
+      </a:tcPr>
+    </a:tc>
+};
 let $project := fn:doc($PROJECT-URI)
 let $classification := $project/*:component/*:name/@*:classification
 let $slide :=
@@ -198,104 +218,15 @@ let $slide :=
                   </a:tc>
                 </a:tr>
                 <a:tr h="544540">
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr/>
-                      <a:lstStyle/>
-                      <a:p>
-                        <a:endParaRPr dirty="0" lang="en-US" sz="1000"/>
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr>
-                      <a:solidFill>
-                        <a:srgbClr val="00B050"/>
-                      </a:solidFill>
-                    </a:tcPr>
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr/>
-                      <a:lstStyle/>
-                      <a:p>
-                        <a:endParaRPr dirty="0" lang="en-US" sz="1000"/>
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr>
-                      <a:solidFill>
-                        <a:srgbClr val="FFFF00"/>
-                      </a:solidFill>
-                    </a:tcPr>
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr/>
-                      <a:lstStyle/>
-                      <a:p>
-                        <a:endParaRPr dirty="0" lang="en-US" sz="1000"/>
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr>
-                      <a:solidFill>
-                        <a:srgbClr val="FF0000"/>
-                      </a:solidFill>
-                    </a:tcPr>
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr/>
-                      <a:lstStyle/>
-                      <a:p>
-                        <a:endParaRPr dirty="0" lang="en-US" sz="1000"/>
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr>
-                      <a:solidFill>
-                        <a:srgbClr val="00B050"/>
-                      </a:solidFill>
-                    </a:tcPr>
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr/>
-                      <a:lstStyle/>
-                      <a:p>
-                        <a:endParaRPr dirty="0" lang="en-US" sz="1000"/>
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr>
-                      <a:solidFill>
-                        <a:srgbClr val="FFFF00"/>
-                      </a:solidFill>
-                    </a:tcPr>
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr/>
-                      <a:lstStyle/>
-                      <a:p>
-                        <a:endParaRPr dirty="0" lang="en-US" sz="1000"/>
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr>
-                      <a:solidFill>
-                        <a:srgbClr val="FF0000"/>
-                      </a:solidFill>
-                    </a:tcPr>
-                  </a:tc>
-                  <a:tc>
-                    <a:txBody>
-                      <a:bodyPr/>
-                      <a:lstStyle/>
-                      <a:p>
-                        <a:endParaRPr dirty="0" lang="en-US" sz="1000"/>
-                      </a:p>
-                    </a:txBody>
-                    <a:tcPr>
-                      <a:solidFill>
-                        <a:srgbClr val="00B050"/>
-                      </a:solidFill>
-                    </a:tcPr>
-                  </a:tc>
+                  {
+                    local:get-color-code($project/*:component/*:metrics/*:burn-rate/text()),
+                    local:get-color-code($project/*:component/*:metrics/*:schedule/text()),
+                    local:get-color-code($project/*:component/*:metrics/*:performance/text()),
+                    local:get-color-code($project/*:component/*:metrics/*:funding/text()),
+                    local:get-color-code($project/*:component/*:metrics/*:sustain/text()),
+                    local:get-color-code($project/*:component/*:metrics/*:risk/text()),
+                    local:get-color-code($project/*:component/*:metrics/*:issues/text())
+                  }
                 </a:tr>
               </a:tbl>
             </a:graphicData>
