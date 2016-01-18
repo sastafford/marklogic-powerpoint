@@ -256,7 +256,7 @@ let $slide :=
             <a:p>
               <a:r>
                 <a:rPr lang="en-US" smtClean="0"/>
-                <a:t>{$project/*:component/*:last-update}</a:t>
+                <a:t>{$project/*:component/*:last-update/text()}</a:t>
               </a:r>
               <a:endParaRPr dirty="0" lang="en-US"/>
             </a:p>
